@@ -7,7 +7,7 @@ Documentación técnica de las APIs de integración para las marcas distribuidas
 
 | Marca                              | Descripción                                                            | Estado       |
 | ---------------------------------- | ---------------------------------------------------------------------- | ------------ |
-| [Hikvision](./hikvision/HikConnect-Team/README.md) | HikConnect for Teams OpenAPI — Video VSaaS, control de acceso, alarmas | ✅ Disponible |
+| [Hikvision](./hikvision/README.md) | Integraciones oficiales para las plataformas y APIs de Hikvision | ✅ Disponible |
 
 
 > Próximamente se agregarán más marcas y plataformas.
