@@ -11,7 +11,7 @@ Demo interactivo que muestra cómo autenticarse con la API de HikConnect Teams, 
 ## Instalación y uso
 
 ```bash
-cd API-DOCS/hikvision/HikConnect-Team/demos/video
+cd API-DOCS/HIKVISION/HikConnect-Team/demos/video
 npm install
 npm start
 ```
@@ -24,12 +24,27 @@ Abre el navegador en `http://localhost:3000`.
 2. **Áreas** — Se carga automáticamente el árbol de áreas de tu cuenta. Haz clic en un área para ver sus cámaras.
 3. **Cámaras** — Haz clic en ▶ junto a cualquier cámara para reproducir el video en vivo.
 
+## Despliegue en Cloudflare Workers
+
+El demo incluye `worker.js` y `wrangler.toml` para desplegarlo como Cloudflare Worker.
+
+```bash
+npm install
+npm run deploy        # despliega en Cloudflare
+npm run cf-dev        # prueba local con wrangler dev
+```
+
+El Worker sirve los archivos estáticos (`index.html`, `ezuikit.js`, etc.) y maneja el endpoint `/proxy` con la misma lógica de validación de dominios que el servidor local.
+
 ## Estructura
 
 ```
 API-DOCS/hikvision/HikConnect-Team/demos/video/
 ├── index.html          # Interfaz del demo (dark UI, EZUIKit)
-├── server.js           # Proxy Node.js/Express (resuelve CORS)
+├── server.js           # Proxy Node.js/Express — desarrollo local
+├── worker.js           # Cloudflare Worker — proxy + assets
+├── wrangler.toml       # Configuración de despliegue en Cloudflare
+├── .assetsignore       # Excluye archivos no web del bundle
 ├── package.json
 ├── ezuikit.js          # SDK de reproducción de Hikvision
 └── ezuikit_static/     # Assets estáticos del SDK (WASM, CSS, imágenes)
@@ -37,6 +52,4 @@ API-DOCS/hikvision/HikConnect-Team/demos/video/
 
 ## Nota sobre CORS
 
-Los endpoints de HikConnect no aceptan solicitudes directas desde el navegador. `server.js` actúa como proxy local: todas las llamadas a la API se envían a `/proxy` y el servidor las reenvía a HikConnect. Solo se permiten dominios de Hikvision (`hikcentralconnect.com`, `hikcentralconnectru.com`, `ezvizlife.com`).
-
-Este proxy es para uso en desarrollo/demo. No lo expongas en producción sin autenticación adicional.
+Los endpoints de HikConnect no aceptan solicitudes directas desde el navegador. Tanto `server.js` (local) como `worker.js` (Cloudflare) actúan como proxy: las llamadas a la API se envían a `/proxy` y se reenvían a HikConnect. Solo se permiten dominios de Hikvision (`hikcentralconnect.com`, `hikcentralconnectru.com`, `ezvizlife.com`).
