@@ -22,6 +22,14 @@
 
 ---
 
+## Skill para agentes
+
+| Skill | Descripción |
+| ----- | ----------- |
+| [Hik-Connect Team Skill](../HikConnect-Team-Skill/README.md) | Envuelve esta OpenAPI para que un agente automatice gestión de recursos, control de acceso, capturas, streaming de video y alarmas. Incluye guía de instalación, configuración de credenciales y requisitos. |
+
+---
+
 ## Tabla de Contenidos
 
 - [Capítulo 1 — Descripción General](#capítulo-1--descripción-general)
